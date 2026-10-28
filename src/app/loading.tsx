@@ -1,8 +1,8 @@
 export default function Loading() {
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-[#080E1A]">
+    <div className="fixed inset-0 flex items-center justify-center bg-[var(--tk-paper)]">
       <div
-        className="w-8 h-8 border-4 border-slate-200 border-t-slate-800 rounded-full animate-spin"
+        className="size-8 animate-spin rounded-full border-2 border-[var(--tk-border)] border-t-[var(--tk-accent)] motion-reduce:animate-none"
         role="status"
         aria-label="Loading"
       />

@@ -1,24 +1,33 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
-import { IBM_Plex_Mono, Inter } from "next/font/google";
+import { DM_Sans, JetBrains_Mono, Syne } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
+const syne = Syne({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
-  variable: "--font-inter",
+  weight: ["500", "600", "700", "800"],
+  variable: "--font-syne",
 });
 
-const plex = IBM_Plex_Mono({
+const dmSans = DM_Sans({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-plex",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-dm",
+});
+
+const jetbrains = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-mono-jb",
 });
 
 const description =
   "The elite route-generation tool for runners and walkers that transforms any distance into a perfectly optimized, instantly navigable path.";
 
+const siteUrl = "https://traksta.ca";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
     default: "Traksta",
     template: "%s | Traksta",
@@ -35,6 +44,7 @@ export const metadata: Metadata = {
     description,
     siteName: "Traksta",
     type: "website",
+    url: siteUrl,
     images: [
       {
         url: "/images/icon.png",
@@ -53,12 +63,12 @@ export const metadata: Metadata = {
   appleWebApp: {
     capable: true,
     title: "Traksta",
-    statusBarStyle: "black",
+    statusBarStyle: "default",
   },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#050505",
+  themeColor: "#f8f6f2",
   width: "device-width",
   initialScale: 1,
 };
@@ -68,18 +78,21 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: "Traksta",
-    url: "https://traksta.base44.app",
+    url: siteUrl,
   };
   const organization = {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "Traksta",
-    url: "https://traksta.base44.app",
-    logo: "/images/logo.png",
+    url: siteUrl,
+    logo: `${siteUrl}/images/logo.png`,
   };
 
   return (
-    <html lang="en" className={`${inter.variable} ${plex.variable} h-full`}>
+    <html
+      lang="en"
+      className={`${syne.variable} ${dmSans.variable} ${jetbrains.variable} h-full`}
+    >
       <body className="min-h-full flex flex-col">
         {children}
         <script

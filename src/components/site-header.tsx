@@ -4,44 +4,54 @@ import { Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { AppStoreButton } from "@/components/app-store-button";
 import { Button } from "@/components/ui/button";
-import { APP_STORE_URL, navLinks } from "@/lib/content";
+import { navLinks } from "@/lib/content";
+import { cn } from "@/lib/utils";
 
 export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
+    const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
   return (
     <>
-      <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      <header
+        className={cn(
+          "fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow,border-color] duration-300",
           scrolled
-            ? "bg-[#080E1A]/85 backdrop-blur-xl border-b border-white/5"
-            : "bg-transparent"
-        }`}
+            ? "border-b border-[var(--tk-border)] bg-[var(--tk-paper)]/90 shadow-[0_1px_0_rgba(15,20,25,0.04)] backdrop-blur-md"
+            : "border-b border-transparent bg-transparent",
+        )}
       >
-        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2.5 group">
+        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-6">
+          <Link href="/" className="flex items-center gap-2.5">
             <Image
               src="/images/logo-pin.png"
-              alt="Traksta icon"
-              width={32}
-              height={32}
-              className="w-8 h-8 rounded-xl object-cover"
+              alt=""
+              width={36}
+              height={36}
+              className="size-9 rounded-xl object-cover"
             />
-            <span className="text-[var(--tk-white)] font-bold tracking-tight text-3xl">
+            <span className="font-heading text-xl font-bold tracking-tight text-[var(--tk-ink)]">
               Traksta
             </span>
           </Link>
 
-          <div className="hidden md:flex items-center gap-8">
+          <nav className="hidden items-center gap-8 md:flex" aria-label="Main">
             {navLinks.map((link) =>
               "external" in link && link.external ? (
                 <a
@@ -49,7 +59,7 @@ export function SiteHeader() {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-sm text-white/50 hover:text-[var(--tk-cyan)] transition-colors duration-300 font-medium"
+                  className="text-sm font-medium text-[var(--tk-muted)] transition-colors hover:text-[var(--tk-ink)]"
                 >
                   {link.label}
                 </a>
@@ -57,42 +67,34 @@ export function SiteHeader() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-sm text-white/50 hover:text-[var(--tk-cyan)] transition-colors duration-300 font-medium"
+                  className="text-sm font-medium text-[var(--tk-muted)] transition-colors hover:text-[var(--tk-ink)]"
                 >
                   {link.label}
                 </Link>
               ),
             )}
-          </div>
+          </nav>
 
           <div className="hidden md:block">
-            <a
-              href={APP_STORE_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-sm font-semibold text-[#080E1A] tk-gradient transition-all duration-300 hover:scale-105"
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-[#080E1A]/40 animate-pulse" />
-              Available on iOS
-            </a>
+            <AppStoreButton className="!py-2.5 !px-5 text-xs" />
           </div>
 
           <Button
             variant="ghost"
             size="icon"
-            onClick={() => setOpen((value) => !value)}
+            onClick={() => setOpen((v) => !v)}
             aria-expanded={open}
             aria-label={open ? "Close menu" : "Open menu"}
-            className="md:hidden text-white/70 hover:bg-white/5 hover:text-white"
+            className="text-[var(--tk-ink)] md:hidden"
           >
             {open ? <X size={22} /> : <Menu size={22} />}
           </Button>
         </div>
-      </nav>
+      </header>
 
       {open ? (
-        <div className="fixed inset-0 z-40 bg-[#080E1A]/96 backdrop-blur-2xl pt-20 px-8 md:hidden">
-          <div className="flex flex-col gap-6">
+        <div className="fixed inset-0 z-40 bg-[var(--tk-paper)] pt-20 px-6 md:hidden">
+          <nav className="flex flex-col gap-5" aria-label="Mobile">
             {navLinks.map((link) =>
               "external" in link && link.external ? (
                 <a
@@ -101,7 +103,7 @@ export function SiteHeader() {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => setOpen(false)}
-                  className="text-2xl font-semibold text-white/80 hover:text-[var(--tk-cyan)] transition-colors"
+                  className="font-heading text-2xl font-semibold text-[var(--tk-ink)]"
                 >
                   {link.label}
                 </a>
@@ -110,21 +112,14 @@ export function SiteHeader() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setOpen(false)}
-                  className="text-2xl font-semibold text-white/80 hover:text-[var(--tk-cyan)] transition-colors"
+                  className="font-heading text-2xl font-semibold text-[var(--tk-ink)]"
                 >
                   {link.label}
                 </Link>
               ),
             )}
-            <a
-              href={APP_STORE_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-4 inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full text-base font-semibold text-[#080E1A] tk-gradient transition-all duration-300 hover:scale-105"
-            >
-              Available on iOS
-            </a>
-          </div>
+            <AppStoreButton className="mt-4 w-full justify-center" />
+          </nav>
         </div>
       ) : null}
     </>

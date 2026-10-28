@@ -3,6 +3,7 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import { useRef } from "react";
+import { SectionHeading, SectionLabel } from "@/components/section-heading";
 import { Button } from "@/components/ui/button";
 import { screens } from "@/lib/content";
 
@@ -11,7 +12,7 @@ export function PreviewCarousel() {
 
   const scroll = (direction: "left" | "right") => {
     scroller.current?.scrollBy({
-      left: direction === "left" ? -300 : 300,
+      left: direction === "left" ? -320 : 320,
       behavior: "smooth",
     });
   };
@@ -19,32 +20,30 @@ export function PreviewCarousel() {
   return (
     <section
       id="preview"
-      className="relative py-28 lg:py-36 bg-[var(--tk-dark)] overflow-hidden scroll-mt-16"
+      className="scroll-mt-20 overflow-hidden bg-[var(--tk-paper-deep)] py-20 lg:py-28"
     >
-      <div
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-px"
-        style={{
-          background:
-            "linear-gradient(90deg,transparent,rgba(57,211,83,0.2),transparent)",
-        }}
-      />
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="flex items-end justify-between mb-14">
-          <div>
-            <span className="text-xs font-mono text-[var(--tk-cyan)]/60 tracking-[0.3em] uppercase block mb-4">
-              {"// Screens"}
-            </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-[var(--tk-white)]">
-              App Preview
-            </h2>
-          </div>
-          <div className="hidden sm:flex gap-2">
+      <div className="mx-auto max-w-6xl px-5 sm:px-6">
+        <div className="mb-12 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+          <SectionHeading
+            align="left"
+            title={
+              <>
+                <SectionLabel>App preview</SectionLabel>
+                <h2 className="font-heading mt-3 text-3xl font-bold tracking-tight text-[var(--tk-ink)] sm:text-4xl lg:text-[2.75rem] lg:leading-[1.1]">
+                  See it before you lace up
+                </h2>
+              </>
+            }
+            subtitle="From distance picker to live map — every screen is built for clarity on the move."
+            className="max-w-xl"
+          />
+          <div className="hidden shrink-0 gap-2 sm:flex">
             <Button
               variant="outline"
               size="icon"
               onClick={() => scroll("left")}
               aria-label="Scroll previews left"
-              className="rounded-full border-white/10 bg-transparent text-white/40 hover:text-[var(--tk-cyan)] hover:border-[var(--tk-cyan)]/30 hover:bg-transparent"
+              className="rounded-full border-[var(--tk-border)] bg-white"
             >
               <ChevronLeft size={18} />
             </Button>
@@ -53,41 +52,36 @@ export function PreviewCarousel() {
               size="icon"
               onClick={() => scroll("right")}
               aria-label="Scroll previews right"
-              className="rounded-full border-white/10 bg-transparent text-white/40 hover:text-[var(--tk-cyan)] hover:border-[var(--tk-cyan)]/30 hover:bg-transparent"
+              className="rounded-full border-[var(--tk-border)] bg-white"
             >
               <ChevronRight size={18} />
             </Button>
           </div>
         </div>
       </div>
+
       <div
         ref={scroller}
-        className="tk-scroll flex gap-6 overflow-x-auto pb-6 px-6"
+        className="tk-scroll flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4 pl-5 sm:pl-[max(1.25rem,calc((100vw-72rem)/2+1.5rem))] pr-5"
       >
         {screens.map((screen) => (
           <figure
-            key={screen.ref}
-            className="flex-shrink-0 w-[220px] sm:w-[250px] group"
+            key={screen.label}
+            className="w-[220px] shrink-0 snap-center sm:w-[240px]"
           >
-            <div className="tk-phone relative rounded-2xl overflow-hidden border border-white/5 bg-[rgba(13,31,60,0.4)] transition-all duration-500">
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-20 h-4 bg-[#080E1A] rounded-b-xl z-10" />
-              <div className="relative aspect-[9/19] overflow-hidden">
+            <div className="rounded-[2rem] bg-[var(--tk-ink)] p-2 shadow-[0_20px_60px_rgba(15,20,25,0.15)]">
+              <div className="relative aspect-[9/19.5] overflow-hidden rounded-[1.65rem] bg-black">
                 <Image
                   src={screen.image}
-                  alt={`Traksta ${screen.label} screen`}
+                  alt={`Traksta — ${screen.label}`}
                   fill
-                  sizes="250px"
-                  className="object-cover group-hover:scale-105 transition-transform duration-700"
+                  sizes="240px"
+                  className="object-cover object-top"
                 />
               </div>
             </div>
-            <figcaption className="mt-4 text-center">
-              <span className="text-[9px] font-mono text-white/20 block mb-1">
-                {screen.ref}
-              </span>
-              <span className="text-sm font-medium text-white/55">
-                {screen.label}
-              </span>
+            <figcaption className="mt-4 text-center text-sm font-medium text-[var(--tk-ink)]">
+              {screen.label}
             </figcaption>
           </figure>
         ))}

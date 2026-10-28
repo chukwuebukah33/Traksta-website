@@ -11,10 +11,9 @@ export const SITE = {
 } as const;
 
 export const navLinks = [
-  { label: "How It Works", href: "/#how-it-works" },
+  { label: "How it works", href: "/#how-it-works" },
   { label: "Features", href: "/#features" },
   { label: "Preview", href: "/#preview" },
-  { label: "Why Traksta", href: "/#why-traksta" },
   { label: "Shop", href: SHOP_URL, external: true },
 ] as const;
 
@@ -416,24 +415,22 @@ export const termsSections = [
 export const supportChannels = [
   {
     icon: "Mail",
-    title: "Email Us",
+    title: "Email us",
     value: SUPPORT_EMAIL,
     href: `mailto:${SUPPORT_EMAIL}`,
-    accent: "#0CCFDF",
   },
   {
-    icon: "MessageCircle",
-    title: "Join the Waitlist",
-    value: "Reserve your spot",
-    href: "/#waitlist",
-    accent: "#39D353",
+    icon: "Smartphone",
+    title: "Get the app",
+    value: "Available on iOS",
+    href: APP_STORE_URL,
+    external: true,
   },
   {
     icon: "Clock",
-    title: "Response Time",
+    title: "Response time",
     value: "Within 48 hours",
     href: null,
-    accent: "#AAFF00",
   },
 ] as const;
 
@@ -443,23 +440,23 @@ export const faqs = [
     a: "Traksta is a route-generation app that turns any distance into a perfectly optimized, instantly navigable path for running, walking, and cycling.",
   },
   {
-    q: "When is Traksta launching?",
-    a: "Traksta is coming soon to iOS. Join the waitlist to lock in your Founding Member spot and be first in line at launch.",
+    q: "Where can I download Traksta?",
+    a: "Traksta is available on the App Store for iPhone. Tap Available on iOS anywhere on this site to open the listing.",
   },
   {
-    q: "Will Traksta work on Apple Watch?",
-    a: "Yes. Traksta is built with WatchOS compatibility so you can generate routes and track activities straight from your wrist — iPhone optional.",
+    q: "Does Traksta work on Apple Watch?",
+    a: "Yes. Traksta supports watchOS so you can generate routes and track activities from your wrist — your iPhone can stay in your pocket.",
   },
   {
     q: "How does route generation work?",
-    a: "Select your distance and Traksta algorithmically builds an optimized loop that follows real roads, trails, and paths, calibrated to within 2% of your target distance.",
+    a: "Pick your distance and Traksta builds an optimized loop on real roads, trails, and paths near you, typically within about 2% of your target distance.",
   },
   {
-    q: "Is the waitlist really free?",
-    a: "Yes — joining the waitlist is completely free. Founding Members also get 50% off their first year of Traksta Pro when we launch.",
+    q: "Is Traksta free?",
+    a: "Core route generation is free to use. Some features may include advertising; see our Privacy Policy for how ads are handled.",
   },
   {
-    q: "How do I get my Founding Member benefit at launch?",
-    a: "We'll email your launch instructions and benefit details to the address you signed up with. Make sure you can receive messages from us at that email.",
+    q: "How do I contact support?",
+    a: `Email us at ${SUPPORT_EMAIL}. We aim to reply within 48 hours on business days.`,
   },
 ] as const;

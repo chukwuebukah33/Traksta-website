@@ -13,73 +13,53 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <div className="min-h-screen bg-[#080E1A]">
-      <div
-        className="fixed top-0 right-0 w-[600px] h-[600px] rounded-full blur-[150px] pointer-events-none"
-        style={{ background: "rgba(12,207,223,0.04)" }}
-      />
-      <div
-        className="fixed bottom-0 left-0 w-[400px] h-[400px] rounded-full blur-[150px] pointer-events-none"
-        style={{ background: "rgba(57,211,83,0.04)" }}
-      />
+    <div className="min-h-screen bg-[var(--tk-paper)]">
       <LegalHeader widthClass="max-w-5xl" />
-      <main className="relative z-10 max-w-5xl mx-auto px-6 py-16 lg:py-24">
-        <div className="mb-16 lg:mb-20">
-          <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-1.5 mb-6">
-            <Shield size={12} className="text-[#0CCFDF]" />
-            <span className="text-xs font-mono text-white/50 tracking-wider uppercase">
-              Privacy Policy
-            </span>
+      <main className="mx-auto max-w-5xl px-5 py-14 sm:px-6 lg:py-20">
+        <div className="mb-14 lg:mb-16">
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[var(--tk-border)] bg-white px-4 py-1.5 text-xs font-medium text-[var(--tk-muted)]">
+            <Shield size={14} className="text-[var(--tk-accent)]" />
+            Privacy policy
           </div>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white mb-6 leading-tight">
-            Your Privacy,
-            <br />
-            <span className="tk-gradient-text">Our Commitment</span>
+          <h1 className="font-heading text-4xl font-bold tracking-tight text-[var(--tk-ink)] sm:text-5xl lg:text-6xl">
+            Your privacy, our commitment
           </h1>
-          <p className="text-lg text-white/45 max-w-2xl leading-relaxed">
-            Traksta is designed with your privacy in mind. We collect the
-            minimum data necessary to deliver a great route-generation
-            experience — nothing more.
+          <p className="mt-5 max-w-2xl text-lg leading-relaxed text-[var(--tk-muted)]">
+            Traksta is designed with your privacy in mind. We collect the minimum
+            data necessary to deliver a great route-generation experience — nothing
+            more.
           </p>
-          <div className="flex items-center gap-3 mt-8 pt-8 border-t border-white/5">
-            <span className="text-xs font-mono text-white/25">
-              Last updated: {privacyUpdated}
-            </span>
-            <span className="w-1 h-1 rounded-full bg-white/15" />
-            <span className="text-xs font-mono text-white/25">
-              Effective immediately
-            </span>
-          </div>
+          <p className="mt-6 font-mono text-xs text-[var(--tk-muted)]">
+            Last updated: {privacyUpdated} · Effective immediately
+          </p>
         </div>
 
-        <div
-          className="rounded-2xl p-6 mb-16 border border-white/5"
-          style={{ background: "rgba(13,31,60,0.5)" }}
+        <nav
+          className="mb-14 rounded-2xl border border-[var(--tk-border)] bg-white p-6"
+          aria-label="Table of contents"
         >
-          <p className="text-xs font-mono text-white/30 uppercase tracking-widest mb-4">
+          <p className="mb-4 font-mono text-[11px] font-medium uppercase tracking-widest text-[var(--tk-muted)]">
             Contents
           </p>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-2">
+          <ul className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
             {privacySections.map((section) => {
               const Icon = icons[section.icon as IconName];
               return (
-                <a
-                  key={section.id}
-                  href={`#${section.id}`}
-                  className="flex items-center gap-2 text-sm text-white/40 hover:text-[#0CCFDF] transition-colors duration-200 py-1"
-                >
-                  <Icon
-                    size={13}
-                    style={{ color: section.color, opacity: 0.7 }}
-                  />
-                  {section.title}
-                </a>
+                <li key={section.id}>
+                  <a
+                    href={`#${section.id}`}
+                    className="flex items-center gap-2 py-1 text-sm text-[var(--tk-muted)] transition-colors hover:text-[var(--tk-accent)]"
+                  >
+                    <Icon size={14} className="text-[var(--tk-accent)]" />
+                    {section.title}
+                  </a>
+                </li>
               );
             })}
-          </div>
-        </div>
+          </ul>
+        </nav>
 
-        <div className="space-y-14">
+        <div className="space-y-10">
           {privacySections.map((section, index) => {
             const Icon = icons[section.icon as IconName];
             const email =
@@ -88,65 +68,41 @@ export default function PrivacyPage() {
               <section
                 key={section.id}
                 id={section.id}
-                className="scroll-mt-20 rounded-2xl p-8 lg:p-10 border border-white/5"
-                style={{ background: "rgba(13,31,60,0.35)" }}
+                className="scroll-mt-20 rounded-2xl border border-[var(--tk-border)] bg-white p-7 lg:p-9"
               >
-                <div className="flex items-center gap-4 mb-8">
-                  <div
-                    className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
-                    style={{
-                      background: `${section.color}12`,
-                      border: `1px solid ${section.color}25`,
-                    }}
-                  >
-                    <Icon
-                      size={20}
-                      strokeWidth={1.5}
-                      style={{ color: section.color }}
-                    />
+                <div className="mb-6 flex items-start gap-4">
+                  <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-[var(--tk-accent-soft)] text-[var(--tk-accent)]">
+                    <Icon size={20} strokeWidth={1.75} />
                   </div>
                   <div>
-                    <span
-                      className="text-[10px] font-mono tracking-widest uppercase block mb-0.5"
-                      style={{ color: `${section.color}60` }}
-                    >
+                    <p className="font-mono text-[11px] text-[var(--tk-muted)]">
                       {String(index + 1).padStart(2, "0")} /{" "}
                       {String(privacySections.length).padStart(2, "0")}
-                    </span>
-                    <h2 className="text-xl lg:text-2xl font-bold text-white">
+                    </p>
+                    <h2 className="font-heading text-xl font-semibold text-[var(--tk-ink)] lg:text-2xl">
                       {section.title}
                     </h2>
                   </div>
                 </div>
-                <div className="space-y-6">
+                <div className="space-y-6 border-l-2 border-[var(--tk-border)] pl-5">
                   {section.content.map((block) => (
-                    <div
-                      key={block.subtitle}
-                      className="border-l-2 pl-5"
-                      style={{ borderColor: `${section.color}25` }}
-                    >
-                      <h3 className="text-sm font-semibold text-white/80 mb-2">
+                    <div key={block.subtitle}>
+                      <h3 className="text-sm font-semibold text-[var(--tk-ink)]">
                         {block.subtitle}
                       </h3>
-                      <p className="text-sm text-white/45 leading-[1.75]">
+                      <p className="mt-2 text-sm leading-relaxed text-[var(--tk-muted)]">
                         {block.text}
                       </p>
                     </div>
                   ))}
                   {email ? (
-                    <div className="mt-4 pt-4 border-t border-white/5">
-                      <a
-                        href={`mailto:${email}`}
-                        className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full text-sm font-semibold text-[#080E1A] transition-all duration-300 hover:scale-105"
-                        style={{
-                          background:
-                            "linear-gradient(135deg, #0CCFDF, #39D353)",
-                        }}
-                      >
-                        <Mail size={15} />
-                        {email}
-                      </a>
-                    </div>
+                    <a
+                      href={`mailto:${email}`}
+                      className="inline-flex items-center gap-2 rounded-full bg-[var(--tk-ink)] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#1a2228]"
+                    >
+                      <Mail size={15} />
+                      {email}
+                    </a>
                   ) : null}
                 </div>
               </section>
@@ -154,28 +110,21 @@ export default function PrivacyPage() {
           })}
         </div>
 
-        <div className="mt-20 pt-10 border-t border-white/5 text-center">
-          <p className="text-sm text-white/25 leading-relaxed max-w-lg mx-auto">
-            This Privacy Policy may be updated periodically. Material changes
-            will be communicated via an in-app notice. Continued use of Traksta
-            after updates constitutes acceptance of the revised policy.
+        <footer className="mt-16 border-t border-[var(--tk-border)] pt-10 text-center">
+          <p className="mx-auto max-w-lg text-sm leading-relaxed text-[var(--tk-muted)]">
+            This Privacy Policy may be updated periodically. Material changes will
+            be communicated via an in-app notice.
           </p>
-          <div className="mt-6 flex items-center justify-center gap-4">
-            <Link
-              href="/"
-              className="text-sm text-white/30 hover:text-[#0CCFDF] transition-colors"
-            >
-              ← Return Home
+          <div className="mt-6 flex items-center justify-center gap-4 text-sm">
+            <Link href="/" className="text-[var(--tk-accent)] hover:underline">
+              ← Home
             </Link>
-            <span className="text-white/10">·</span>
-            <Link
-              href="/terms"
-              className="text-sm text-white/30 hover:text-[#39D353] transition-colors"
-            >
-              Terms of Service →
+            <span className="text-[var(--tk-border)]">·</span>
+            <Link href="/terms" className="text-[var(--tk-accent)] hover:underline">
+              Terms of service →
             </Link>
           </div>
-        </div>
+        </footer>
       </main>
     </div>
   );

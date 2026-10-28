@@ -1,58 +1,30 @@
 "use client";
 
-import { usePathname, useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
-
+import { ArrowLeft } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 export default function NotFound() {
   const pathname = usePathname();
-  const router = useRouter();
-  const missing = pathname.replace(/^\//, "");
+  const missing = pathname.replace(/^\//, "") || "this page";
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-6 bg-slate-50">
-      <div className="max-w-md w-full">
-        <div className="text-center space-y-6">
-          <div className="space-y-2">
-            <h1 className="text-7xl font-light text-slate-300">404</h1>
-            <div className="h-0.5 w-16 bg-slate-200 mx-auto" />
-          </div>
-          <div className="space-y-3">
-            <h2 className="text-2xl font-medium text-slate-800">
-              Page Not Found
-            </h2>
-            <p className="text-slate-600 leading-relaxed">
-              The page{" "}
-              <span className="font-medium text-slate-700">
-                &quot;{missing}&quot;
-              </span>{" "}
-              could not be found in this application.
-            </p>
-          </div>
-          <div className="pt-6">
-            <Button
-              variant="outline"
-              className="inline-flex items-center h-auto px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-200 rounded-lg hover:bg-slate-50 hover:border-slate-300 hover:text-slate-700"
-              onClick={() => router.push("/")}
-            >
-              <svg
-                className="w-4 h-4 mr-2"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-                />
-              </svg>
-              Go Home
-            </Button>
-          </div>
-        </div>
-      </div>
+    <div className="flex min-h-screen flex-col items-center justify-center bg-[var(--tk-paper)] px-6">
+      <p className="font-heading text-8xl font-bold text-[var(--tk-border)]">404</p>
+      <h1 className="font-heading mt-4 text-2xl font-semibold text-[var(--tk-ink)]">
+        Page not found
+      </h1>
+      <p className="mt-3 max-w-md text-center text-[var(--tk-muted)]">
+        We couldn&apos;t find{" "}
+        <span className="font-medium text-[var(--tk-ink)]">&quot;{missing}&quot;</span>
+        . It may have moved or never existed.
+      </p>
+      <Link
+        href="/"
+        className="mt-8 inline-flex h-9 items-center justify-center gap-2 rounded-full bg-[var(--tk-ink)] px-6 text-sm font-medium text-white transition-colors hover:bg-[#1a2228]"
+      >
+        <ArrowLeft size={16} />
+        Back to home
+      </Link>
     </div>
   );
 }

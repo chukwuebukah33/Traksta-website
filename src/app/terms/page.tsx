@@ -12,59 +12,45 @@ export const metadata: Metadata = {
 
 export default function TermsPage() {
   return (
-    <div className="min-h-screen bg-[#080E1A]">
-      <div
-        className="fixed top-0 left-0 w-[500px] h-[500px] rounded-full blur-[150px] pointer-events-none"
-        style={{ background: "rgba(57,211,83,0.04)" }}
-      />
+    <div className="min-h-screen bg-[var(--tk-paper)]">
       <LegalHeader widthClass="max-w-4xl" />
-      <main className="relative z-10 max-w-4xl mx-auto px-6 py-16 lg:py-24">
-        <div className="mb-14">
-          <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-1.5 mb-6">
-            <FileText size={12} className="text-[#39D353]" />
-            <span className="text-xs font-mono text-white/50 tracking-wider uppercase">
-              Terms of Service
-            </span>
+      <main className="mx-auto max-w-4xl px-5 py-14 sm:px-6 lg:py-20">
+        <div className="mb-12">
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-[var(--tk-border)] bg-white px-4 py-1.5 text-xs font-medium text-[var(--tk-muted)]">
+            <FileText size={14} className="text-[var(--tk-accent)]" />
+            Terms of service
           </div>
-          <h1 className="text-4xl sm:text-5xl font-black tracking-tight text-white mb-4">
+          <h1 className="font-heading text-4xl font-bold tracking-tight text-[var(--tk-ink)] sm:text-5xl">
             Terms of Service
           </h1>
-          <p className="text-white/40 text-sm font-mono">
+          <p className="mt-4 font-mono text-xs text-[var(--tk-muted)]">
             Last updated: {termsUpdated}
           </p>
         </div>
 
-        <div className="space-y-8">
+        <div className="space-y-6">
           {termsSections.map((section, index) => (
             <article
               key={section.title}
-              className="rounded-2xl p-7 border border-white/5"
-              style={{ background: "rgba(13,31,60,0.35)" }}
+              className="rounded-2xl border border-[var(--tk-border)] bg-white p-7"
             >
               <div className="flex items-start gap-4">
-                <span
-                  className="text-[10px] font-mono font-bold mt-1 px-2 py-0.5 rounded flex-shrink-0"
-                  style={{
-                    color: "#0CCFDF",
-                    background: "rgba(12,207,223,0.08)",
-                    border: "1px solid rgba(12,207,223,0.15)",
-                  }}
-                >
+                <span className="font-mono text-xs font-medium text-[var(--tk-accent)]">
                   {String(index + 1).padStart(2, "0")}
                 </span>
                 <div className="flex-1">
-                  <h2 className="text-base font-bold text-white mb-3">
+                  <h2 className="font-heading text-base font-semibold text-[var(--tk-ink)]">
                     {section.title}
                   </h2>
-                  <p className="text-sm text-white/45 leading-[1.8]">
+                  <p className="mt-3 text-sm leading-relaxed text-[var(--tk-muted)]">
                     {section.text}
                   </p>
                   {"hasEmail" in section && section.hasEmail ? (
                     <a
                       href={`mailto:${SUPPORT_EMAIL}`}
-                      className="inline-flex items-center gap-2 mt-4 text-sm font-medium transition-colors duration-300 text-[#0CCFDF]"
+                      className="mt-4 inline-block text-sm font-medium text-[var(--tk-accent)] hover:underline"
                     >
-                      {SUPPORT_EMAIL} →
+                      {SUPPORT_EMAIL}
                     </a>
                   ) : null}
                 </div>
@@ -73,21 +59,15 @@ export default function TermsPage() {
           ))}
         </div>
 
-        <div className="mt-16 pt-8 border-t border-white/5 flex items-center justify-center gap-4">
-          <Link
-            href="/"
-            className="text-sm text-white/30 hover:text-[#0CCFDF] transition-colors"
-          >
-            ← Return Home
+        <footer className="mt-14 flex items-center justify-center gap-4 border-t border-[var(--tk-border)] pt-8 text-sm">
+          <Link href="/" className="text-[var(--tk-accent)] hover:underline">
+            ← Home
           </Link>
-          <span className="text-white/10">·</span>
-          <Link
-            href="/privacy"
-            className="text-sm text-white/30 hover:text-[#39D353] transition-colors"
-          >
-            Privacy Policy →
+          <span className="text-[var(--tk-border)]">·</span>
+          <Link href="/privacy" className="text-[var(--tk-accent)] hover:underline">
+            Privacy policy →
           </Link>
-        </div>
+        </footer>
       </main>
     </div>
   );

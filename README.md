@@ -1,36 +1,39 @@
-# Traksta marketing site
+# Traksta
 
-Marketing website for [Traksta](https://traksta.ca) — route generation for runners and walkers.
+Public website for Traksta, the route-generation app for runners, walkers, and cyclists. This repo is a self-hosted recreation of the public pages at [traksta.base44.app](https://traksta.base44.app), so the product team owns the code.
 
-## Stack
+## Prerequisites
 
-- Next.js (App Router), TypeScript, Tailwind CSS, shadcn/ui
+- [Node.js](https://nodejs.org/) 20 or newer (LTS recommended)
+- npm (included with Node.js)
 
-## Develop
+## Run locally
+
+From the repo root:
 
 ```bash
 npm install
 npm run dev
 ```
 
-Dev server runs at [http://127.0.0.1:43123](http://127.0.0.1:43123).
+Open [http://127.0.0.1:43123](http://127.0.0.1:43123) in your browser. The dev server binds to `127.0.0.1` on port `43123` (see `package.json`).
 
-## Build
+### Other scripts
 
 ```bash
-npm run build
-npm start
+npm run build   # production build (same as Vercel)
+npm run start   # serve the production build locally
+npm run lint    # ESLint
 ```
 
 ## Routes
 
-- `/` — Home
-- `/privacy` — Privacy policy
-- `/terms` — Terms of service
-- `/support` — Support & FAQ
+| Path | Page |
+| --- | --- |
+| `/` | Marketing home |
+| `/privacy` | Privacy policy |
+| `/terms` | Terms of service |
+| `/support` | Support and FAQ |
+| anything else | 404 |
 
-## Links
-
-- [App Store](https://apps.apple.com/app/traksta/id6778127655)
-- [Shop](https://traksta-apparels.myshopify.com/)
-- Support: hello@traksta.app
+Images live in `public/images`. There is no account system or database. App Store, shop, and support email links point at the same public destinations as the live site.

@@ -1,8 +1,20 @@
 import { cn } from "@/lib/utils";
 
-export function SectionLabel({ children }: { children: React.ReactNode }) {
+export function SectionLabel({
+  children,
+  tone = "default",
+}: {
+  children: React.ReactNode;
+  tone?: "default" | "light";
+}) {
   return (
-    <p className="font-mono text-[11px] font-medium uppercase tracking-[0.2em] text-[var(--tk-accent)]">
+    <p
+      className={
+        tone === "light"
+          ? "font-mono text-[11px] font-medium uppercase tracking-[0.2em] text-[var(--tk-accent-glow)]"
+          : "font-mono text-[11px] font-medium uppercase tracking-[0.2em] text-[var(--tk-accent)]"
+      }
+    >
       {children}
     </p>
   );

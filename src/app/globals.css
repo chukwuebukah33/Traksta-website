@@ -58,6 +58,7 @@
   --tk-accent-soft: #e6f3f1;
   --tk-coral: #d4654a;
   --tk-dark-band: #12181c;
+  --tk-accent-glow: #3dd9c8;
 
   --background: var(--tk-paper);
   --foreground: var(--tk-ink);
@@ -120,14 +121,55 @@
   background-image:
     radial-gradient(
       ellipse 80% 50% at 20% -10%,
-      color-mix(in srgb, var(--tk-accent) 12%, transparent),
+      color-mix(in srgb, var(--tk-accent) 14%, transparent),
       transparent 55%
     ),
     radial-gradient(
       ellipse 60% 40% at 90% 10%,
-      color-mix(in srgb, var(--tk-coral) 8%, transparent),
+      color-mix(in srgb, var(--tk-coral) 10%, transparent),
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse 50% 30% at 50% 100%,
+      color-mix(in srgb, var(--tk-accent) 6%, transparent),
+      transparent 45%
+    );
+}
+
+.tk-dark-mesh {
+  background-image:
+    radial-gradient(
+      ellipse 70% 50% at 10% 20%,
+      color-mix(in srgb, var(--tk-accent-glow) 18%, transparent),
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse 55% 45% at 90% 60%,
+      color-mix(in srgb, var(--tk-coral) 12%, transparent),
       transparent 50%
     );
+}
+
+.tk-gradient-heading {
+  background: linear-gradient(
+    120deg,
+    var(--tk-accent) 0%,
+    #1a9a8a 45%,
+    var(--tk-coral) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.tk-glass-chip {
+  @apply rounded-2xl border border-white/10 bg-white/[0.06] backdrop-blur-md transition-[border-color,background-color,transform] duration-300;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .tk-glass-chip:hover {
+    @apply border-white/20 bg-white/[0.09];
+  }
 }
 
 .tk-grain {
